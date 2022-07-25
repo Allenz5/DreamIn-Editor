@@ -48,7 +48,7 @@ public class EditLevelSetting : MonoBehaviour
 
         if (Duration.text == "")
         {
-            Warning.Instance.SetEmptyMessage("GameTitle");
+            Warning.Instance.SetEmptyMessage("GameTime");
             Warning.Instance.Show();
             return;
         }

@@ -81,7 +81,7 @@ namespace EditorLogics
             if(objectsStr != ""){
                 objectsStr = objectsStr.Substring(0, objectsStr.Length - 1);
             }
-            String mapStr = "{" + string.Format("\"background\": \"{0}\",\"collide_map\": \"{1}\",\"object\": [{2}]", background,
+            String mapStr = "{" + string.Format("\"background\": \"{0}\",\"collide_map\": \"{1}\",\"map_object\": [{2}]", background,
                 collideMapStr, objectsStr) + "}";
 
             return mapStr;
