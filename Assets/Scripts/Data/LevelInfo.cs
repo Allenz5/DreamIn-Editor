@@ -7,6 +7,9 @@ public class LevelInfo {
     private string title_;
     private int duration_;
     private string end_;
+    private string question_;
+    private List<string> answers_;
+
     private string background_ = "";
     private List<ObjectInfo> objects_;
     private bool[,] collideMap_;
@@ -52,6 +55,26 @@ public class LevelInfo {
         return end_;
     }
 
+    public void SetQuestion(string question)
+    {
+        question_ = question;
+    }
+
+    public string GetQuestion()
+    {
+        return question_;
+    }
+
+    public void SetAnswers(List<string> answers)
+    {
+        answers_ = new List<string>(answers);
+    }
+
+    public List<string> GetAnswers()
+    {
+        return answers_;
+    }
+
     public void SetBackground(string background)
     {
         background_ = background;
@@ -84,7 +107,17 @@ public class LevelInfo {
 
     public override string ToString()
     {
-        String collideMapStr = "", objectsStr = "";
+        String answersStr = "", collideMapStr = "", objectsStr = "";
+        for (int i = 0; i < answers_.Count; i++)
+        {
+            answersStr += answers_[i].ToString() + ",";
+        }
+        if (answersStr != "")
+        {
+            answersStr = answersStr.Substring(0, answersStr.Length - 1);
+        }
+
+
         for (int i = 0; i < collideMap_.GetLength(0); i++)
         {
             for (int j = 0; j < collideMap_.GetLength(1); j++)
@@ -97,6 +130,8 @@ public class LevelInfo {
             }
             collideMapStr += ";";
         }
+
+
         for (int i = 0; i < objects_.Count; i++)
         {
             objectsStr += "{" + objects_[i].ToString() + "},";
@@ -105,7 +140,9 @@ public class LevelInfo {
         {
             objectsStr = objectsStr.Substring(0, objectsStr.Length - 1);
         }
-        String levelStr = string.Format("\"title\": \"{0}\",\"duration\": \"{1}\",\"end\": \"{2}\",\"background\": \"{3}\",\"collide_map\": \"{4}\",\"object\": [{5}]", title_, duration_, end_, background_,
+
+
+        String levelStr = string.Format("\"title\": \"{0}\",\"duration\": \"{1}\",\"end\": \"{2}\",\"question\":\"{3}\",\"answers\": [{4}],\"background\": \"{5}\",\"collide_map\": \"{6}\",\"object\": [{7}]", title_, duration_, end_, question_, answersStr, background_,
                 collideMapStr, objectsStr);
 
         return levelStr;

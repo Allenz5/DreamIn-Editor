@@ -15,9 +15,6 @@ namespace EditorLogics
         //Name of this game
         public string name;
 
-        //Ending of this game
-        public string end;
-
         //Characters of this game
         public List<CharacterInfo> CharacterInfoList;
 
@@ -46,7 +43,7 @@ namespace EditorLogics
             }
 
             string numOfPlayer = CharacterInfoList.Count.ToString();
-            String gameDataStr = "{" + string.Format("\"name\": \"{0}\",\"players_num\": \"{1}\",\"final\": \"{2}\",\"map\": [{3}],\"character\": [{4}]", name, numOfPlayer, end, levelInfoStr,
+            String gameDataStr = "{" + string.Format("\"name\": \"{0}\",\"players_num\": \"{1}\",\"map\": [{2}],\"character\": [{3}]", name, numOfPlayer, levelInfoStr,
                 characterInfoStr) + "}";
             String editorDataStr = "{" + string.Format("\"name\": \"{0}\",\"players_num\": \"{1}\",\"infos\": {2}", name, numOfPlayer, gameDataStr) + "}";
             return editorDataStr;
@@ -66,14 +63,6 @@ namespace EditorLogics
 
         public void SetName(string newName){
             name = newName;
-        }
-
-        public string GetEnd(){
-            return end;
-        }
-
-        public void SetEnd(string newEnd){
-            end = newEnd;
         }
 
         public void SetLevelInfoList(List<LevelInfo> infos)

@@ -18,7 +18,6 @@ public class EditGameSettings : MonoBehaviour
     public GameObject LevelsUI;
     public GameObject GameUI;
     public TMP_InputField GameTitle;
-    public TMP_InputField EndMessage;
     public GameObject FinishPage;
 
     //Singleton
@@ -54,13 +53,6 @@ public class EditGameSettings : MonoBehaviour
             return;
         }
 
-        if (EndMessage.text == "")
-        {
-            Warning.Instance.SetEmptyMessage("Endmessage");
-            Warning.Instance.Show();
-            return;
-        }
-
         EditCharacters.Instance.SaveData();
         EditLevels.Instance.SaveData();
         EditorData data = EditorData.Instance;
@@ -80,7 +72,6 @@ public class EditGameSettings : MonoBehaviour
         }
 
         data.SetName(GameTitle.text);
-        data.SetEnd(EndMessage.text);
         string dataJsonStr = data.ToString();
         dataJsonStr = dataJsonStr.Replace("\n", "\\n");
         Debug.Log(dataJsonStr);
@@ -96,6 +87,5 @@ public class EditGameSettings : MonoBehaviour
     public void ClearSettings()
     {
         GameTitle.text = "";
-        EndMessage.text = "";
     }
 }

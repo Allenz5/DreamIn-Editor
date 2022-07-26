@@ -15,7 +15,7 @@ public class LevelPanel : MonoBehaviour
         editor.curPanel = this;
         editor.SwitchToLevel();
 
-        EditLevelSetting.Instance.FillSettings(info.GetTitle(), info.GetDuration(), info.GetSummary());
+        EditLevelSetting.Instance.FillSettings(info.GetTitle(), info.GetDuration(), info.GetSummary(), info.GetQuestion(), info.GetAnswers());
         EditMap.Instance.FillMap(info.GetBackground(), info.GetObjects(), info.GetCollideMap());
     }
 
