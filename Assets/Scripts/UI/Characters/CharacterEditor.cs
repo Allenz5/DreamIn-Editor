@@ -11,6 +11,7 @@ public class CharacterEditor : MonoBehaviour
     public StoryEditor storyEditor;
 
     public void onActive(CharacterInfo info){
+        /*
         identityEditor.gameObject.SetActive(true);
         storyEditor.gameObject.SetActive(false);
         CharacterInfo.IdentityType identity = info.GetIdentity();
@@ -29,6 +30,6 @@ public class CharacterEditor : MonoBehaviour
         }
         storyEditor.name.text = info.GetName();
         storyEditor.story.text = info.GetStory();
-
+        */
     }
 }

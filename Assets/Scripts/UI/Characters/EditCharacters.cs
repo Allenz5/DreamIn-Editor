@@ -69,7 +69,6 @@ public class EditCharacters : MonoBehaviour
     /// </summary>
     public void AddButton()
     {
-
         int idx = CharacterPanels.Count;
         Vector3 pos = new Vector3(-300, 0, 0);
         pos.x += 120 * idx;
@@ -84,6 +83,9 @@ public class EditCharacters : MonoBehaviour
             Add.SetActive(false);
         }
         SwitchToCharacter();
+        StoryEditor storyEditor = StoryEditor.Instance;
+        storyEditor.name.text = "";
+        storyEditor.story.text = "";
     }
 
     /// <summary>

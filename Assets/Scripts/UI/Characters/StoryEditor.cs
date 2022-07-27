@@ -9,24 +9,26 @@ public class StoryEditor : MonoBehaviour
 {
     public TMP_InputField name;
     public TMP_InputField story;
-    public Image identityDisplay;
-    public IdentityEditor identityEditor;
-    public List<CharacterInfo> CharacterInfoList = new List<CharacterInfo>();
 
+    //Singleton
+    public static StoryEditor Instance;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        CharacterInfoList = new List<CharacterInfo>();
+        if (Instance == null || Instance != this)
+        {
+            Destroy(Instance);
+        }
+        Instance = this;
     }
 
-    public void onActive(Sprite identityImage){
-        identityDisplay.sprite = identityImage;
-    }
-
-    public void BackButton(){
-        identityEditor.gameObject.SetActive(true);
-        gameObject.SetActive(false);
+    public void BackButton()
+    {
+        if (!EditCharacters.Instance.curPanel.isComplete)
+        {
+            EditCharacters.Instance.DeleteCurCharacter();
+        }
+        EditCharacters.Instance.SwitchToCharacters();
     }
 
     public void SaveButton(){
@@ -41,19 +43,13 @@ public class StoryEditor : MonoBehaviour
             return;
         }
         EditCharacters editor = EditCharacters.Instance;
-        editor.curCharacter.SetIdentity(identityEditor.curIdentity);
         editor.curCharacter.SetName(name.text);
         editor.curCharacter.SetStory(story.text);
         
-        //每完成一个人物的编辑，向编辑器数据中存储对应的人物信息
-        CharacterInfo curCharacterInfo = editor.curCharacter;
-        //CharacterInfoList.Add(curCharacterInfo);
         editor.AddInfo();
         editor.curPanel.isComplete = true;
-        
-        editor.curPanel.identityDisplay.sprite = identityDisplay.sprite;
+
         editor.curPanel.name.text = name.text;
         editor.SwitchToCharacters();
     }
-
 }

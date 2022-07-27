@@ -6,15 +6,7 @@ using System;
 [Serializable]
 public class CharacterInfo
 {
-    public enum IdentityType
-    {
-        Detective,
-        Murderer,
-        Suspect
-    }
-
     private string name_;
-    private IdentityType identity_;
     private string story_;
 
     public CharacterInfo()
@@ -22,24 +14,17 @@ public class CharacterInfo
         Debug.Log("Character created");
         name_ = "";
         story_ = "";
-        identity_ = IdentityType.Suspect;
     }
 
-    public CharacterInfo(string name, IdentityType identity, string story)
+    public CharacterInfo(string name, string story)
     {
         name_ = name;
-        identity_ = identity;
         story_ = story;
     }
 
     public string GetName()
     {
         return name_;
-    }
-
-    public IdentityType GetIdentity()
-    {
-        return identity_;
     }
 
     public string GetStory()
@@ -58,12 +43,6 @@ public class CharacterInfo
         Debug.Log("character " + name_ + " \'s story updated");
         story_ = story;
     }
-
-    public void SetIdentity(IdentityType identity)
-    {
-        Debug.Log("character " + name_ + " \'s identity updated");
-        identity_ = identity;
-    }
     
     /// <summary>
     /// Create Json data
@@ -71,6 +50,6 @@ public class CharacterInfo
     /// <returns>Json Data</returns>
     public override string ToString()
     {
-        return string.Format("\"name\": \"{0}\",\"identity\": {1},\"background\": \"{2}\"", name_, (int)identity_, story_);
+        return string.Format("\"name\": \"{0}\",\"background\": \"{1}\"", name_, story_);
     }
 }

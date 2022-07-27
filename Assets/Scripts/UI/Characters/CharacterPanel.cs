@@ -10,7 +10,6 @@ public class CharacterPanel : MonoBehaviour
     public CharacterInfo info;
     public Button btn;
     public TMP_Text name;
-    public Image identityDisplay;
     [HideInInspector]
     public bool isComplete;
     // Start is called before the first frame update
@@ -27,6 +26,9 @@ public class CharacterPanel : MonoBehaviour
     public void OnClick(){
         EditCharacters editor = EditCharacters.Instance;
         editor.curPanel = this;
+        StoryEditor storyEditor = StoryEditor.Instance;
+        storyEditor.name.text = info.GetName();
+        storyEditor.story.text = info.GetStory();
         editor.SwitchToCharacter();
     }
 

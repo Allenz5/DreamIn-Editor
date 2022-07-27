@@ -111,11 +111,13 @@ public class EditLevelSetting : MonoBehaviour
 
     public void AddAnswerButton()
     {
-        if (Answers.Count >= 5)
+        if (Answers.Count >= 10)
         {
             return;
         }
-        Vector3 pos = new Vector3(150, -20 - 30 * Answers.Count, 0);
+        int col = Answers.Count % 2;
+        int row = Answers.Count / 2;
+        Vector3 pos = new Vector3(100 + 125 * col, -20 - 30 * row, 0);
         GameObject cur = Instantiate(AnswerPrefab, AnswersUI.transform);
         cur.transform.localPosition = pos;
 
@@ -133,7 +135,9 @@ public class EditLevelSetting : MonoBehaviour
     {
         for (int i = 0; i < Answers.Count; i++)
         {
-            Answers[i].transform.localPosition = new Vector3(150, -20 - 30 * i, 0);
+            int col = i % 2;
+            int row = i / 2;
+            Answers[i].transform.localPosition = new Vector3(100 + 125 * col, -20 - 30 * row, 0);
         }
     }
 
