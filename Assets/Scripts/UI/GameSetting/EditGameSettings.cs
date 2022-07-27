@@ -76,7 +76,7 @@ public class EditGameSettings : MonoBehaviour
         dataJsonStr = dataJsonStr.Replace("\n", "\\n");
         Debug.Log(dataJsonStr);
 
-        //EditorLogics.Network.SendJsonByHttpPost(dataJsonStr);
+        EditorLogics.Network.SendJsonByHttpPost(dataJsonStr);
         GameUI.SetActive(false);
         FinishPage.SetActive(true);
     }
