@@ -110,7 +110,7 @@ public class LevelInfo {
         String answersStr = "", collideMapStr = "", objectsStr = "";
         for (int i = 0; i < answers_.Count; i++)
         {
-            answersStr += answers_[i].ToString() + ",";
+            answersStr += "\"" + answers_[i] + "\"" + ",";
         }
         if (answersStr != "")
         {
