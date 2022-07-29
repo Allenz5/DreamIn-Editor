@@ -142,7 +142,7 @@ public class LevelInfo {
         }
 
 
-        String levelStr = string.Format("\"title\": \"{0}\",\"duration\": \"{1}\",\"end\": \"{2}\",\"question\":\"{3}\",\"answers\": [{4}],\"background\": \"{5}\",\"collide_map\": \"{6}\",\"object\": [{7}]", title_, duration_, end_, question_, answersStr, background_,
+        String levelStr = string.Format("\"title\": \"{0}\",\"duration\": \"{1}\",\"end\": \"{2}\",\"question\":\"{3}\",\"answers\": [{4}],\"background\": \"{5}\",\"collide_map\": \"{6}\",\"map_object\": [{7}]", title_, duration_, end_, question_, answersStr, background_,
                 collideMapStr, objectsStr);
 
         return levelStr;
