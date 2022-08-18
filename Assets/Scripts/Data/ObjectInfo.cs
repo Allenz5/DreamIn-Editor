@@ -61,7 +61,7 @@ public class ObjectInfo
 
     public void SetMessage(string message)
     {
-        message_ = message;
+        message_ = Escaping.Escape(message);
 
     }
     

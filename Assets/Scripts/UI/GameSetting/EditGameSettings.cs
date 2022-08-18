@@ -46,8 +46,6 @@ public class EditGameSettings : MonoBehaviour
     /// </summary>
     public void SaveButton()
     {
-        string[] escapingWord = {"\\", "\"", "\n"};
-        string[] escapedWord = {"\\\\", "\\\"", "\\n"};
         if (GameTitle.text == "")
         {
             Warning.Instance.SetEmptyMessage("GameTitle");
@@ -75,9 +73,6 @@ public class EditGameSettings : MonoBehaviour
 
         data.SetName(GameTitle.text);
         string dataJsonStr = data.ToString();
-        for(int i = 0; i < escapingWord.Length; i++){
-            dataJsonStr  = dataJsonStr .Replace(escapingWord[i], escapedWord[i]);
-        }
         Debug.Log(dataJsonStr);
 
         EditorLogics.Network.SendJsonByHttpPost(dataJsonStr);

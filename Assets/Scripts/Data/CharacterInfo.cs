@@ -34,14 +34,13 @@ public class CharacterInfo
 
     public void SetName(string name)
     {
-        name_ = name;
-        Debug.Log("character " + name_ + " \'s name updated");
+        name_ = Escaping.Escape(name);
+        
     }
 
     public void SetStory(string story)
     {
-        Debug.Log("character " + name_ + " \'s story updated");
-        story_ = story;
+        story_ = Escaping.Escape(story);
     }
     
     /// <summary>

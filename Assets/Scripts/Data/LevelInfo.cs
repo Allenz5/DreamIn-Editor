@@ -27,7 +27,7 @@ public class LevelInfo {
 
     public void SetTitle(string title)
     {
-        title_ = title;
+        title_ = Escaping.Escape(title);
     }
 
     public string GetTitle()
@@ -47,7 +47,7 @@ public class LevelInfo {
 
     public void SetSummary(string summary)
     {
-        end_ = summary;
+        end_ = Escaping.Escape(summary);
     }
 
     public string GetSummary()
@@ -57,7 +57,7 @@ public class LevelInfo {
 
     public void SetQuestion(string question)
     {
-        question_ = question;
+        question_ = Escaping.Escape(question);
     }
 
     public string GetQuestion()
@@ -77,7 +77,7 @@ public class LevelInfo {
 
     public void SetBackground(string background)
     {
-        background_ = background;
+        background_ = Escaping.Escape(background);
     }
 
     public string GetBackground()

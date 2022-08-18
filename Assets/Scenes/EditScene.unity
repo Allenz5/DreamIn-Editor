@@ -15870,6 +15870,7 @@ MonoBehaviour:
   TempImage: {fileID: 1402471913}
   Message: {fileID: 1176201957}
   LevelsEditor: {fileID: 153682275}
+  Options: {fileID: 1886929043}
   ColliderImage: {fileID: 1790597903611494058, guid: 1121cff893dfc6143a1b9028af16dd6f, type: 3}
   ObjectPrefab: {fileID: 6769360498833883768, guid: bf2ba8537c121d549a744ef9d75bd44f, type: 3}
   Objects: []
