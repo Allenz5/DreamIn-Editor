@@ -23,6 +23,10 @@ public class ButtonGroup : MonoBehaviour
             Exit(btn.gameObject);
             btn.onPointerClick.AddListener(Select);
         }
+        Init();
+    }
+
+    public void Init(){
         Select(DefaultBtn.gameObject);
         DefaultBtn.onClick.Invoke();
     }

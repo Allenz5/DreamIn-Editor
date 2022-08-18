@@ -49,7 +49,7 @@ namespace EditorLogics
 #if UNITY_EDITOR
             while (!request.isDone)
             {
-                Debug.Log("wait");
+                //Debug.Log("wait");
             }
             Debug.Log("Status Code: " + request.responseCode);//获得返回值
             if (request.responseCode == 200)//检验是否成功

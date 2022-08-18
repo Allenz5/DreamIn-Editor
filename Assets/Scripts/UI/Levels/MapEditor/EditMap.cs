@@ -27,6 +27,7 @@ public class EditMap : MonoBehaviour
     public GameObject TempImage;
     public GameObject Message;
     public GameObject LevelsEditor;
+    public ButtonGroup Options;
 
     //Prefabs
     public GameObject ColliderImage;
@@ -146,6 +147,7 @@ public class EditMap : MonoBehaviour
         BackgroundImage.sprite = null;
         OnEnable();
         ClearMap();
+        Options.Init();
     }
 
     public void ClearMap()

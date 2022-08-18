@@ -6,10 +6,14 @@ using System;
 [Serializable]
 public class ObjectInfo
 {
+    public static string[] escapingWord = {"\"", "\n", "\\"};
+    public static string[] escapedWord = {"\\\"", "\\n", "\\\\"};
+
     private string image_;
     private string position_;
     private string message_;
     private Vector3 originPos_;
+
 
     public ObjectInfo()
     {
@@ -58,6 +62,7 @@ public class ObjectInfo
     public void SetMessage(string message)
     {
         message_ = message;
+
     }
     
     /// <summary>

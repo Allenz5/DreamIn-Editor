@@ -105,7 +105,7 @@ public class EditLevelSetting : MonoBehaviour
         levels.FinishAdding();
 
         //Clear Data
-        map.ClearMap();
+        map.ResetMap();
         ClearSettings();
     }
 
