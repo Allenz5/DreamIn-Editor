@@ -23,6 +23,7 @@ namespace EditorLogics
 
         public override string ToString()
         {
+            //Characters Info
             String characterInfoStr = "";
              for (int i = 0; i < CharacterInfoList.Count; i++)
             {
@@ -32,6 +33,7 @@ namespace EditorLogics
                 characterInfoStr = characterInfoStr.Substring(0, characterInfoStr.Length - 1);
             }
 
+            //Levels Info
             String levelInfoStr = "";
             for (int i = 0; i < LevelInfoList.Count; i++)
             {
@@ -42,10 +44,19 @@ namespace EditorLogics
                 levelInfoStr = levelInfoStr.Substring(0, levelInfoStr.Length - 1);
             }
 
+            //General Info
             string numOfPlayer = CharacterInfoList.Count.ToString();
+            int duration = 0;
+            for (int i = 0; i < LevelInfoList.Count; i++)
+            {
+                duration += LevelInfoList[i].GetDuration();
+            }
+            string durationOfGame = duration.ToString();
+            string coverOfGame = LevelInfoList[0].GetBackground();
+
             String gameDataStr = "{" + string.Format("\"name\": \"{0}\",\"players_num\": \"{1}\",\"map\": [{2}],\"character\": [{3}]", name, numOfPlayer, levelInfoStr,
                 characterInfoStr) + "}";
-            String editorDataStr = "{" + string.Format("\"name\": \"{0}\",\"players_num\": \"{1}\",\"infos\": {2}", name, numOfPlayer, gameDataStr) + "}";
+            String editorDataStr = "{" + string.Format("\"name\": \"{0}\", \"players_num\": \"{1}\", \"duration\": \"{2}\", \"cover\": \"{3}\", \"infos\": {4}", name, numOfPlayer, durationOfGame, coverOfGame, gameDataStr) + "}";
             return editorDataStr;
         }
 
