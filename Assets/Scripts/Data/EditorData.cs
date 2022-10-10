@@ -14,6 +14,7 @@ namespace EditorLogics
         public static EditorData Instance;
         //Name of this game
         public string name;
+        public string summary;
 
         //Characters of this game
         public List<CharacterInfo> CharacterInfoList;
@@ -56,7 +57,7 @@ namespace EditorLogics
 
             String gameDataStr = "{" + string.Format("\"name\": \"{0}\",\"players_num\": \"{1}\",\"map\": [{2}],\"character\": [{3}]", name, numOfPlayer, levelInfoStr,
                 characterInfoStr) + "}";
-            String editorDataStr = "{" + string.Format("\"name\": \"{0}\", \"players_num\": \"{1}\", \"duration\": \"{2}\", \"cover\": \"{3}\", \"infos\": {4}", name, numOfPlayer, durationOfGame, coverOfGame, gameDataStr) + "}";
+            String editorDataStr = "{" + string.Format("\"name\": \"{0}\", \"summary\": \"{1}\", \"players_num\": \"{2}\", \"duration\": \"{3}\", \"cover\": \"{4}\", \"infos\": {5}", name, summary, numOfPlayer, durationOfGame, coverOfGame, gameDataStr) + "}";
             return editorDataStr;
         }
 
@@ -74,6 +75,11 @@ namespace EditorLogics
 
         public void SetName(string newName){
             name = newName;
+        }
+
+        public void SetSummary(string newSummary)
+        {
+            summary = Escaping.Escape(newSummary);
         }
 
         public void SetLevelInfoList(List<LevelInfo> infos)
