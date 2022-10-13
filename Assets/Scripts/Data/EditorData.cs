@@ -45,15 +45,21 @@ namespace EditorLogics
                 levelInfoStr = levelInfoStr.Substring(0, levelInfoStr.Length - 1);
             }
 
-            //General Info
+            //num of player
             string numOfPlayer = CharacterInfoList.Count.ToString();
+
+            //duration of whole game
             int duration = 0;
             for (int i = 0; i < LevelInfoList.Count; i++)
             {
                 duration += LevelInfoList[i].GetDuration();
             }
             string durationOfGame = duration.ToString();
+
+            //cover url
             string coverOfGame = LevelInfoList[0].GetBackground();
+            coverOfGame = "https://raw.githubusercontent.com/hanxuan5/DreamIn-Assets/master/" + coverOfGame + ".png";
+            coverOfGame = coverOfGame.Replace(" ", "%20");
 
             String gameDataStr = "{" + string.Format("\"name\": \"{0}\",\"players_num\": \"{1}\",\"map\": [{2}],\"character\": [{3}]", name, numOfPlayer, levelInfoStr,
                 characterInfoStr) + "}";
