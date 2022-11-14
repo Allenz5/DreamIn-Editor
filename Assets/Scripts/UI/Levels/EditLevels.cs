@@ -105,6 +105,7 @@ public class EditLevels : MonoBehaviour
     {
         if (!LevelPanels.Contains(curPanel))
         {
+            Debug.Log("destroy");
             Destroy(curPanel.gameObject);
         }
     }

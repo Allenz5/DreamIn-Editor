@@ -14,9 +14,10 @@ public class LevelPanel : MonoBehaviour
         EditLevels editor = EditLevels.Instance;
         editor.curPanel = this;
         editor.SwitchToLevel();
-
+        
         EditLevelSetting.Instance.FillSettings(info.GetTitle(), info.GetDuration(), info.GetSummary(), info.GetQuestion(), info.GetAnswers());
         EditMap.Instance.FillMap(info.GetBackground(), info.GetObjects(), info.GetCollideMap());
+        Debug.Log(editor.curPanel.GetLevelInfo().ToString());
     }
 
     public void Delete()

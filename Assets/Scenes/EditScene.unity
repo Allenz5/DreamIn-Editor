@@ -1033,12 +1033,40 @@ PrefabInstance:
     m_TransformParent: {fileID: 1880909152}
     m_Modifications:
     - target: {fileID: 2482486731700531827, guid: cf853164c6ad54455833df056ae0c72d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2482486731700531827, guid: cf853164c6ad54455833df056ae0c72d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2482486731700531827, guid: cf853164c6ad54455833df056ae0c72d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 239930282}
     - target: {fileID: 2482486731700531827, guid: cf853164c6ad54455833df056ae0c72d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1369063268}
+    - target: {fileID: 2482486731700531827, guid: cf853164c6ad54455833df056ae0c72d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2482486731700531827, guid: cf853164c6ad54455833df056ae0c72d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: NextButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 2482486731700531827, guid: cf853164c6ad54455833df056ae0c72d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: FillData
+      objectReference: {fileID: 0}
+    - target: {fileID: 2482486731700531827, guid: cf853164c6ad54455833df056ae0c72d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: EditorLogics.EditorData, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2482486731700531827, guid: cf853164c6ad54455833df056ae0c72d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4192179058284058230, guid: cf853164c6ad54455833df056ae0c72d, type: 3}
       propertyPath: m_Pivot.x
@@ -2429,7 +2457,6 @@ MonoBehaviour:
   CharacterTag: {fileID: 6021680419103680369, guid: f2325c71d6c53cd42a6a797829c151a6, type: 3}
   Add: {fileID: 625325390}
   CharacterPanels: []
-  CharacterInfoList: []
   curPanel: {fileID: 0}
 --- !u!4 &239930283
 Transform:
@@ -10702,10 +10729,14 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1922744736154794050, guid: dd342f5d70c56437fb81603ff9b95ff4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1922744736154794050, guid: dd342f5d70c56437fb81603ff9b95ff4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1922744736154794050, guid: dd342f5d70c56437fb81603ff9b95ff4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1922744736154794050, guid: dd342f5d70c56437fb81603ff9b95ff4, type: 3}
@@ -10713,7 +10744,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 260005576}
     - target: {fileID: 1922744736154794050, guid: dd342f5d70c56437fb81603ff9b95ff4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1369063268}
+    - target: {fileID: 1922744736154794050, guid: dd342f5d70c56437fb81603ff9b95ff4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1922744736154794050, guid: dd342f5d70c56437fb81603ff9b95ff4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1922744736154794050, guid: dd342f5d70c56437fb81603ff9b95ff4, type: 3}
@@ -10721,11 +10760,23 @@ PrefabInstance:
       value: BackButton
       objectReference: {fileID: 0}
     - target: {fileID: 1922744736154794050, guid: dd342f5d70c56437fb81603ff9b95ff4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: FillData
+      objectReference: {fileID: 0}
+    - target: {fileID: 1922744736154794050, guid: dd342f5d70c56437fb81603ff9b95ff4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: EditGameSettings, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1922744736154794050, guid: dd342f5d70c56437fb81603ff9b95ff4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: EditorLogics.EditorData, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1922744736154794050, guid: dd342f5d70c56437fb81603ff9b95ff4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1922744736154794050, guid: dd342f5d70c56437fb81603ff9b95ff4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4264686635451345617, guid: dd342f5d70c56437fb81603ff9b95ff4, type: 3}
@@ -11447,7 +11498,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22ad420de7cb43a78e203581b385ae94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: -1
+  user_id: 
+  game_id: 
   status: 0
   game_type: 1
   name: 

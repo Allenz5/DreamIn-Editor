@@ -119,6 +119,11 @@ public class EditMap : MonoBehaviour
     public void BackButton()
     {
         LevelsEditor.GetComponent<EditLevels>().CancelAdding();
+        EditMap map = EditMap.Instance;
+        EditLevelSetting setting = EditLevelSetting.Instance;
+        map.ClearMap();
+        setting.ClearSettings();
+
         LevelUI.SetActive(false);
         LevelsUI.SetActive(true);
     }
@@ -183,8 +188,6 @@ public class EditMap : MonoBehaviour
         foreach(ObjectInfo obj in fillObjects){
             FillObject(obj);
         }
-
-
     }
 
     private void FillObject(ObjectInfo info){

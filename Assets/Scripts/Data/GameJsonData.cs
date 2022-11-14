@@ -86,6 +86,7 @@ public class ReceiveData
 public class GameData
 {
     public string _id;
+    public string summary;
     public string name;
     public string players_num;
 

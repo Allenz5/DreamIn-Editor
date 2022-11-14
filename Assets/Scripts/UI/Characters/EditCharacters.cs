@@ -20,9 +20,6 @@ public class EditCharacters : MonoBehaviour
 
     //Data
     public List<CharacterPanel> CharacterPanels;
-    public List<CharacterInfo> CharacterInfoList;
-    [HideInInspector]
-    public CharacterInfo curCharacter;
     [HideInInspector]
     public CharacterPanel curPanel;
 
@@ -35,7 +32,6 @@ public class EditCharacters : MonoBehaviour
     void Start()
     {
         CharacterPanels = new List<CharacterPanel>();
-        CharacterInfoList = new List<CharacterInfo>();
         Vector3 pos = new Vector3(-300, 0, 0);
         Add.transform.localPosition = pos;
     }
@@ -61,7 +57,12 @@ public class EditCharacters : MonoBehaviour
 
     public void SaveData()
     {
-        EditorData.Instance.SetCharacterInfoList(CharacterInfoList);
+        List<CharacterInfo> CharacterInfos = new List<CharacterInfo>();
+        for (int i = 0; i < CharacterPanels.Count; i++)
+        {
+            CharacterInfos.Add(CharacterPanels[i].info);
+        }
+        EditorData.Instance.SetCharacterInfoList(CharacterInfos);
     }
 
     /// <summary>
@@ -93,10 +94,6 @@ public class EditCharacters : MonoBehaviour
     /// </summary>
     /// <param name="panel"></param>
     public void DeleteButton(CharacterPanel panel){
-        int idx = CharacterPanels.IndexOf(panel);
-        if(idx < CharacterInfoList.Count){
-            CharacterInfoList.RemoveAt(idx);
-        }
         CharacterPanels.Remove(panel);
         Destroy(panel.gameObject);
         RePosition();
@@ -135,11 +132,9 @@ public class EditCharacters : MonoBehaviour
     /// </summary>
     public void SwitchToCharacter()
     {
-        curCharacter = curPanel.info;
         CharacterEditor characterEditor = CharacterUI.GetComponent<CharacterEditor>();
         CharactersUI.SetActive(false);
         CharacterUI.SetActive(true);
-        characterEditor.onActive(curCharacter);
     }
 
     /// <summary>
@@ -149,13 +144,6 @@ public class EditCharacters : MonoBehaviour
     {
         CharactersUI.SetActive(true);
         CharacterUI.SetActive(false);
-    }
-
-    /// <summary>
-    /// Add a Character
-    /// </summary>
-    public void AddInfo(){
-        CharacterInfoList.Add(curCharacter);
     }
 
     /// <summary>

@@ -43,12 +43,9 @@ public class StoryEditor : MonoBehaviour
             return;
         }
         EditCharacters editor = EditCharacters.Instance;
-        editor.curCharacter.SetName(name.text);
-        editor.curCharacter.SetStory(story.text);
-        
-        editor.AddInfo();
+        editor.curPanel.info.SetName(name.text);
+        editor.curPanel.info.SetStory(story.text);
         editor.curPanel.isComplete = true;
-
         editor.curPanel.name.text = name.text;
         editor.SwitchToCharacters();
     }

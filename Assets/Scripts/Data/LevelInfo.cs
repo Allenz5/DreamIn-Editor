@@ -92,7 +92,8 @@ public class LevelInfo {
 
     public List<ObjectInfo> GetObjects()
     {
-        return objects_;
+        List<ObjectInfo> Objs = new List<ObjectInfo>(objects_);
+        return Objs;
     }
 
     public void SetCollideMap(bool[,] collideMap)

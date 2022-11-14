@@ -7,6 +7,7 @@ using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using LitJson;
+using TMPro;
 //using UnityEditor.U2D.Animation;
 
 namespace EditorLogics
@@ -27,6 +28,9 @@ namespace EditorLogics
 
         //Levels of this game
         public List<LevelInfo> LevelInfoList;
+
+        //Saved Data
+        GameData gameData;
 
         void Awake()
         {
@@ -105,7 +109,23 @@ namespace EditorLogics
 
             //read and store in gameData
             ReceiveData d = JsonMapper.ToObject<ReceiveData>(webRequest.downloadHandler.text);
-            GameData gameData = JsonMapper.ToObject<GameData>(d.game_doc);
+            gameData = JsonMapper.ToObject<GameData>(d.game_doc);
+            game_id = gameData._id;
+        }
+
+        public void FillCharactersData()
+        {
+
+        }
+
+        public void FillLevelsData()
+        {
+
+        }
+
+        public void FillGameSettingsData()
+        {
+            
         }
         #endregion
 

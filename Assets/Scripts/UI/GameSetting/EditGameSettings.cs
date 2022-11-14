@@ -86,7 +86,9 @@ public class EditGameSettings : MonoBehaviour
         string dataJsonStr = data.ToString();
         Debug.Log(dataJsonStr);
 
-        EditorLogics.Network.SendJsonByHttpPost(dataJsonStr);
+        //Send data
+        //EditorLogics.Network.SendJsonByHttpPost(dataJsonStr);
+
         GameUI.SetActive(false);
         FinishPage.SetActive(true);
     }
@@ -108,7 +110,7 @@ public class EditGameSettings : MonoBehaviour
         //Check
         if (data.GetUserId() == "")
         {
-            Warning.Instance.SetEmptyMessage("You need to register first");
+            Warning.Instance.SetMessage("You need to register first");
             Warning.Instance.Show();
             return;
         }
@@ -118,7 +120,7 @@ public class EditGameSettings : MonoBehaviour
         Debug.Log(dataJsonStr);
 
         //Send data
-        EditorLogics.Network.SendJsonByHttpPost(dataJsonStr);
+        //EditorLogics.Network.SendJsonByHttpPost(dataJsonStr);
 
         //Finish
         GameUI.SetActive(false);
