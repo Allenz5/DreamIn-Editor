@@ -44,9 +44,9 @@ public class EditGameSettings : MonoBehaviour
     }
 
     /// <summary>
-    /// Create Json data and send to backend
+    /// Create Json data and publish
     /// </summary>
-    public void SaveButton()
+    public void PublishButton()
     {
         if (GameTitle.text == "")
         {
@@ -82,10 +82,45 @@ public class EditGameSettings : MonoBehaviour
 
         data.SetName(GameTitle.text);
         data.SetSummary(Summary.text);
+        data.SetStatus(0);
         string dataJsonStr = data.ToString();
         Debug.Log(dataJsonStr);
 
         EditorLogics.Network.SendJsonByHttpPost(dataJsonStr);
+        GameUI.SetActive(false);
+        FinishPage.SetActive(true);
+    }
+
+
+    /// <summary>
+    /// Create Json data and save
+    /// </summary>
+    public void SaveButton()
+    {
+        //Prepare Data
+        EditCharacters.Instance.SaveData();
+        EditLevels.Instance.SaveData();
+        EditorData data = EditorData.Instance;
+        data.SetName(GameTitle.text);
+        data.SetSummary(Summary.text);
+        data.SetStatus(1);
+
+        //Check
+        if (data.GetUserId() == "")
+        {
+            Warning.Instance.SetEmptyMessage("You need to register first");
+            Warning.Instance.Show();
+            return;
+        }
+
+        //Construct Json file
+        string dataJsonStr = data.ToString();
+        Debug.Log(dataJsonStr);
+
+        //Send data
+        EditorLogics.Network.SendJsonByHttpPost(dataJsonStr);
+
+        //Finish
         GameUI.SetActive(false);
         FinishPage.SetActive(true);
     }

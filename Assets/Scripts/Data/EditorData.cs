@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Text;
+using LitJson;
 //using UnityEditor.U2D.Animation;
 
 namespace EditorLogics
@@ -12,7 +14,11 @@ namespace EditorLogics
     public class EditorData : MonoBehaviour
     {
         public static EditorData Instance;
-        //Name of this game
+        //Basic info of game
+        public string user_id = "";
+        public string game_id = "";
+        public int status;
+        public int game_type = 1;
         public string name;
         public string summary;
 
@@ -21,6 +27,15 @@ namespace EditorLogics
 
         //Levels of this game
         public List<LevelInfo> LevelInfoList;
+
+        void Awake()
+        {
+            if (Instance == null || Instance != this)
+            {
+                Destroy(Instance);
+            }
+            Instance = this;
+        }
 
         public override string ToString()
         {
@@ -54,7 +69,6 @@ namespace EditorLogics
             {
                 duration += LevelInfoList[i].GetDuration();
             }
-            string durationOfGame = duration.ToString();
 
             //cover url
             string coverOfGame = LevelInfoList[0].GetBackground();
@@ -63,20 +77,56 @@ namespace EditorLogics
 
             String gameDataStr = "{" + string.Format("\"name\": \"{0}\",\"players_num\": \"{1}\",\"map\": [{2}],\"character\": [{3}]", name, numOfPlayer, levelInfoStr,
                 characterInfoStr) + "}";
-            String editorDataStr = "{" + string.Format("\"name\": \"{0}\", \"summary\": \"{1}\", \"players_num\": \"{2}\", \"duration\": \"{3}\", \"cover\": \"{4}\", \"infos\": {5}", name, summary, numOfPlayer, durationOfGame, coverOfGame, gameDataStr) + "}";
+            String editorDataStr = "{" + string.Format("\"user_id\": \"{0}\", \"game_id\": \"{1}\", \"name\": \"{2}\", \"players_num\": \"{3}\", \"status\": \"{4}\", \"game_time\": \"{5}\", \"game_type\": \"{6}\", \"cover\": \"{7}\", \"summary\": \"{8}\", \"infos\": {9}", user_id, game_id, name, numOfPlayer, status, duration, game_type, coverOfGame, summary, gameDataStr) + "}";
             return editorDataStr;
         }
 
-        void Awake(){
-            if(Instance == null || Instance != this)
+        #region Fetch & Write Saved Data
+        IEnumerator GetGameData(string ID)
+        {
+            string url = "https://api.dreamin.land/get_game_doc/";
+            UnityWebRequest webRequest = new UnityWebRequest(url, "POST");
+
+            Encoding encoding = Encoding.UTF8;
+            byte[] buffer = encoding.GetBytes("{\"id\":" + ID + "}");
+            webRequest.uploadHandler = new UploadHandlerRaw(buffer);
+            webRequest.downloadHandler = new DownloadHandlerBuffer();
+
+            yield return webRequest.SendWebRequest();
+
+            if (webRequest.result == UnityWebRequest.Result.ProtocolError || webRequest.result == UnityWebRequest.Result.ConnectionError)
             {
-                Destroy(Instance);
+                Debug.LogError(webRequest.error + "\n" + webRequest.downloadHandler.text);
             }
-            Instance = this;
+            else
+            {
+                Debug.Log("get game data succcess!");
+            }
+
+            //read and store in gameData
+            ReceiveData d = JsonMapper.ToObject<ReceiveData>(webRequest.downloadHandler.text);
+            GameData gameData = JsonMapper.ToObject<GameData>(d.game_doc);
+        }
+        #endregion
+
+        #region Getter & Setter
+        public string GetUserId()
+        {
+            return user_id;
         }
 
         public string GetName(){
             return name;
+        }
+
+        public void SetUserId(string newId)
+        {
+            user_id = newId;
+        }
+
+        public void SetGameId(string newId)
+        {
+            game_id = newId;
         }
 
         public void SetName(string newName){
@@ -88,6 +138,11 @@ namespace EditorLogics
             summary = Escaping.Escape(newSummary);
         }
 
+        public void SetStatus(int newStatus)
+        {
+            status = newStatus;
+        }
+
         public void SetLevelInfoList(List<LevelInfo> infos)
         {
             LevelInfoList = new List<LevelInfo>(infos);
@@ -96,5 +151,7 @@ namespace EditorLogics
         public void SetCharacterInfoList(List<CharacterInfo> infos){
             CharacterInfoList = new List<CharacterInfo>(infos);
         }
+
+        #endregion
     }
 }
