@@ -110,7 +110,7 @@ namespace EditorLogics
             //read and store in gameData
             ReceiveData d = JsonMapper.ToObject<ReceiveData>(webRequest.downloadHandler.text);
             gameData = JsonMapper.ToObject<GameData>(d.game_doc);
-            game_id = gameData._id;
+            //TODO : Fill data
         }
 
         public void FillCharactersData()
