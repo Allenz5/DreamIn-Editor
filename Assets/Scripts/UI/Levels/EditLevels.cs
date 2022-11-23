@@ -87,13 +87,28 @@ public class EditLevels : MonoBehaviour
     {
         GameObject cur = Instantiate(LevelTag, LevelsUI.transform);
         curPanel = cur.GetComponent(typeof(LevelPanel)) as LevelPanel;
-
         curPanel.GetLevelInfo().SetBackground(m.background);
-        curPanel.GetLevelInfo().SetCollideMap(m.collide_map);
         curPanel.GetLevelInfo().SetTitle(m.title);
         curPanel.GetLevelInfo().SetDuration(int.Parse(m.duration));
         curPanel.GetLevelInfo().SetSummary(m.end);
         curPanel.GetLevelInfo().SetQuestion(m.question);
+
+        string[] rows = m.collide_map.Split(';');
+        bool[,] ColliderMap = new bool[rows.Length, rows[0].Length];
+        for (int i = 0; i < rows.Length; i++)
+        {
+            for (int j = 0; j < rows[0].Length; j++)
+            {
+                if (rows[i][j] == '0')
+                {
+                    ColliderMap[i,j] = false;
+                } else
+                {
+                    ColliderMap[i,j] = true;
+                }
+            }
+        }
+        curPanel.GetLevelInfo().SetCollideMap(ColliderMap);
 
         List<ObjectInfo> objs = new List<ObjectInfo>();
         for (int i = 0; i < m.map_object.Count; i++)
