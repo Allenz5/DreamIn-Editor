@@ -16,21 +16,29 @@ namespace EditorLogics
     {
         public static EditorData Instance;
         //Basic info of game
-        public string user_id = "";
-        public string game_id = "";
-        public int status;
-        public int game_type = 1;
-        public string name;
-        public string summary;
+        [HideInInspector] public string user_id = "";
+        [HideInInspector] public string game_id = "";
+        [HideInInspector] public int status;
+        [HideInInspector] public int game_type = 1;
+        [HideInInspector] public string name;
+        [HideInInspector] public string summary;
 
         //Characters of this game
-        public List<CharacterInfo> CharacterInfoList;
+        [HideInInspector] public List<CharacterInfo> CharacterInfoList;
 
         //Levels of this game
-        public List<LevelInfo> LevelInfoList;
+        [HideInInspector] public List<LevelInfo> LevelInfoList;
 
         //Saved Data
-        GameData gameData;
+        [HideInInspector] ReceiveData gameInfo;
+        [HideInInspector] GameData gameData;
+
+        //UI
+        public GameObject Character;
+        public GameObject Levels;
+        public GameObject Level;
+        public GameObject SettingEditor;
+        public GameObject GameSettings;
 
         void Awake()
         {
@@ -39,6 +47,21 @@ namespace EditorLogics
                 Destroy(Instance);
             }
             Instance = this;
+        }
+
+        void Start()
+        {
+            //Initialize all Instances
+            Character.SetActive(false);
+            Levels.SetActive(false);
+            Level.SetActive(false);
+            SettingEditor.SetActive(false);
+            GameSettings.SetActive(false);
+
+            if (game_id != "")
+            {
+                GetGameData(game_id);
+            }
         }
 
         public override string ToString()
@@ -108,25 +131,39 @@ namespace EditorLogics
             }
 
             //read and store in gameData
-            ReceiveData d = JsonMapper.ToObject<ReceiveData>(webRequest.downloadHandler.text);
-            gameData = JsonMapper.ToObject<GameData>(d.game_doc);
-            //TODO : Fill data
+            gameInfo = JsonMapper.ToObject<ReceiveData>(webRequest.downloadHandler.text);
+            gameData = JsonMapper.ToObject<GameData>(gameInfo.game_doc);
+            FillData();
         }
 
-        public void FillCharactersData()
+        public void FillData()
         {
+            //Fill Characters
+            EditCharacters editCharacters = EditCharacters.Instance;
+            for (int i = 0; i < gameData.character.Count; i++)
+            {
+                editCharacters.AddCharacter(gameData.character[i]);
+            }
+
+            //Fill Levels
+            EditLevels editLevels = EditLevels.Instance;
+            for (int i = 0; i < gameData.map.Count; i++)
+            {
+                editLevels.AddLevel(gameData.map[i]);
+            }
+
+            //Fill Game Settings
+            EditGameSettings editGameSettings = EditGameSettings.Instance;
+            editGameSettings.GameTitle.text = gameData.name;
+            editGameSettings.Summary.text = gameInfo.summary;
 
         }
 
-        public void FillLevelsData()
+        public void GetGameScriptID(string id)
         {
-
+            game_id = id;
         }
 
-        public void FillGameSettingsData()
-        {
-            
-        }
         #endregion
 
         #region Getter & Setter

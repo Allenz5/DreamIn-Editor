@@ -89,6 +89,31 @@ public class EditCharacters : MonoBehaviour
         storyEditor.story.text = "";
     }
 
+    public void AddCharacter(GameCharacter c)
+    {
+        //Calculate the Position
+        int idx = CharacterPanels.Count;
+        Vector3 pos = new Vector3(-300, 0, 0);
+        pos.x += 120 * idx;
+
+        //Create Character Panel
+        GameObject cur = Instantiate(CharacterTag, CharactersUI.transform);
+        cur.transform.localPosition = pos;
+        Vector3 addPos = new Vector3(-300 + 120 * (idx + 1), 0, 0);
+        Add.transform.localPosition = addPos;
+        curPanel = cur.GetComponent(typeof(CharacterPanel)) as CharacterPanel;
+        CharacterPanels.Add(curPanel);
+        if (CharacterPanels.Count >= maxCharacters)
+        {
+            Add.SetActive(false);
+        }
+
+        curPanel.info.SetName(c.name);
+        curPanel.info.SetStory(c.background);
+        curPanel.isComplete = true;
+        curPanel.name.text = c.name;
+    }
+
     /// <summary>
     /// Delete a Character
     /// </summary>

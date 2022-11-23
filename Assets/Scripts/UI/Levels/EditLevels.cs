@@ -82,6 +82,35 @@ public class EditLevels : MonoBehaviour
             EditLevelSetting.Instance.ClearSettings();
         }
     }
+
+    public void AddLevel(GameMap m)
+    {
+        GameObject cur = Instantiate(LevelTag, LevelsUI.transform);
+        curPanel = cur.GetComponent(typeof(LevelPanel)) as LevelPanel;
+
+        curPanel.GetLevelInfo().SetBackground(m.background);
+        curPanel.GetLevelInfo().SetCollideMap(m.collide_map);
+        curPanel.GetLevelInfo().SetTitle(m.title);
+        curPanel.GetLevelInfo().SetDuration(int.Parse(m.duration));
+        curPanel.GetLevelInfo().SetSummary(m.end);
+        curPanel.GetLevelInfo().SetQuestion(m.question);
+
+        List<ObjectInfo> objs = new List<ObjectInfo>();
+        for (int i = 0; i < m.map_object.Count; i++)
+        {
+            ObjectInfo obj = new ObjectInfo();
+            obj.SetImage(m.map_object[i].image_link);
+            obj.SetMessage(m.map_object[i].message);
+            obj.SetPosition(m.map_object[i].GetPosition());
+        }
+        curPanel.GetLevelInfo().SetObejcts(objs);
+
+        List<string> answersStr = new List<string>(m.answers);
+        curPanel.GetLevelInfo().SetAnswers(answersStr);
+
+        curPanel.UpdatePanel(m.title, m.duration);
+        FinishAdding();
+    }
     
 
     public void DeleteButton(LevelPanel panel)
