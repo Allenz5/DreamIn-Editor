@@ -58,10 +58,12 @@ namespace EditorLogics
             SettingEditor.SetActive(false);
             GameSettings.SetActive(false);
 
+            StartCoroutine(GetGameData("60"));
+            /*
             if (game_id != "")
             {
                 GetGameData(game_id);
-            }
+            }*/
         }
 
         public override string ToString()
@@ -104,7 +106,7 @@ namespace EditorLogics
 
             String gameDataStr = "{" + string.Format("\"name\": \"{0}\",\"players_num\": \"{1}\",\"map\": [{2}],\"character\": [{3}]", name, numOfPlayer, levelInfoStr,
                 characterInfoStr) + "}";
-            String editorDataStr = "{" + string.Format("\"user_id\": \"{0}\", \"game_id\": \"{1}\", \"name\": \"{2}\", \"players_num\": \"{3}\", \"status\": \"{4}\", \"duration\": \"{5}\", \"game_type\": \"{6}\", \"cover\": \"{7}\", \"game_desc\": \"{8}\", \"infos\": {9}", user_id, game_id, name, numOfPlayer, status, duration, game_type, coverOfGame, summary, gameDataStr) + "}";
+            String editorDataStr = "{" + string.Format("\"user_id\": \"{0}\", \"game_id\": \"{1}\", \"name\": \"{2}\", \"players_num\": \"{3}\", \"status\": \"{4}\", \"duration\": \"{5}\", \"game_type\": \"{6}\", \"cover\": \"{7}\", \"summary\": \"{8}\", \"infos\": {9}", user_id, game_id, name, numOfPlayer, status, duration, game_type, coverOfGame, summary, gameDataStr) + "}";
             return editorDataStr;
         }
 
@@ -155,7 +157,7 @@ namespace EditorLogics
             //Fill Game Settings
             EditGameSettings editGameSettings = EditGameSettings.Instance;
             editGameSettings.GameTitle.text = gameData.name;
-            editGameSettings.Summary.text = gameInfo.game_desc;
+            editGameSettings.Summary.text = gameInfo.summary;
 
         }
 

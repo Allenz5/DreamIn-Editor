@@ -29,6 +29,14 @@ public class ObjectInfo
         message_ = message;
     }
 
+    public ObjectInfo(ObjectInfo objectInfo)
+    {
+        image_ = objectInfo.image_;
+        position_ = objectInfo.position_;
+        message_ = objectInfo.message_;
+        originPos_ = objectInfo.originPos_;
+    }
+
     public string GetImage()
     {
         return image_;

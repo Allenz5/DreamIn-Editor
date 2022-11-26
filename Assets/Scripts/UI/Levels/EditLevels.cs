@@ -69,10 +69,6 @@ public class EditLevels : MonoBehaviour
         GameObject cur = Instantiate(LevelTag, LevelsUI.transform);
         curPanel = cur.GetComponent(typeof(LevelPanel)) as LevelPanel;
         SwitchToLevel();
-        if(EditGameSettings.Instance != null)
-        {
-            EditGameSettings.Instance.ClearSettings();
-        }
         if(EditMap.Instance != null)
         {
             EditMap.Instance.ResetMap();
@@ -86,12 +82,12 @@ public class EditLevels : MonoBehaviour
     public void AddLevel(GameMap m)
     {
         GameObject cur = Instantiate(LevelTag, LevelsUI.transform);
-        curPanel = cur.GetComponent(typeof(LevelPanel)) as LevelPanel;
-        curPanel.GetLevelInfo().SetBackground(m.background);
-        curPanel.GetLevelInfo().SetTitle(m.title);
-        curPanel.GetLevelInfo().SetDuration(int.Parse(m.duration));
-        curPanel.GetLevelInfo().SetSummary(m.end);
-        curPanel.GetLevelInfo().SetQuestion(m.question);
+        LevelPanel currentPanel = cur.GetComponent(typeof(LevelPanel)) as LevelPanel;
+        currentPanel.GetLevelInfo().SetBackground(m.background);
+        currentPanel.GetLevelInfo().SetTitle(m.title);
+        currentPanel.GetLevelInfo().SetDuration(int.Parse(m.duration));
+        currentPanel.GetLevelInfo().SetSummary(m.end);
+        currentPanel.GetLevelInfo().SetQuestion(m.question);
 
         string[] rows = m.collide_map.Split(';');
         bool[,] ColliderMap = new bool[rows.Length, rows[0].Length];
@@ -108,7 +104,7 @@ public class EditLevels : MonoBehaviour
                 }
             }
         }
-        curPanel.GetLevelInfo().SetCollideMap(ColliderMap);
+        currentPanel.GetLevelInfo().SetCollideMap(ColliderMap);
 
         List<ObjectInfo> objs = new List<ObjectInfo>();
         for (int i = 0; i < m.map_object.Count; i++)
@@ -117,14 +113,17 @@ public class EditLevels : MonoBehaviour
             obj.SetImage(m.map_object[i].image_link);
             obj.SetMessage(m.map_object[i].message);
             obj.SetPosition(m.map_object[i].GetPosition());
+            objs.Add(obj);
         }
-        curPanel.GetLevelInfo().SetObejcts(objs);
+        currentPanel.GetLevelInfo().SetObejcts(objs);
 
         List<string> answersStr = new List<string>(m.answers);
-        curPanel.GetLevelInfo().SetAnswers(answersStr);
+        currentPanel.GetLevelInfo().SetAnswers(answersStr);
 
-        curPanel.UpdatePanel(m.title, m.duration);
-        FinishAdding();
+        currentPanel.UpdatePanel(m.title, m.duration);
+        LevelPanels.Add(currentPanel);
+        RePosition();
+        Debug.Log(currentPanel.GetLevelInfo().ToString());
     }
     
 

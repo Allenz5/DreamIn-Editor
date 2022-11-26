@@ -34,7 +34,6 @@ public class EditMap : MonoBehaviour
     public GameObject ObjectPrefab;
 
     //Data
-    [HideInInspector]
     public List<GameObject> Objects;
     public List<ObjectInfo> ObjectInfoList;
     public List<GameObject> Colliders;
@@ -173,21 +172,22 @@ public class EditMap : MonoBehaviour
 
     public void FillMap(string background, List<ObjectInfo> fillObjects, bool[,] fillColliders)
     {
-        //TODO : �ѱ�������Ʒ����ײ��ص�ͼ�༭����
         Sprite bg = Resources.Load<Sprite>(background);
         Image BackgroundImage = Background.GetComponent<Image>();
         BackgroundImage.sprite = bg;
         BackgroundImage.color = Color.white;
         BackgroundImage.rectTransform.sizeDelta = bg.textureRect.size;
-        EditMap.Instance.ClearMap();
-        EditMap.Instance.SaveBackgroundPath(BackgroundImage.sprite.name);
+        SaveBackgroundPath(BackgroundImage.sprite.name);
 
         ColliderMap = fillColliders;
         ObjectInfoList = fillObjects;
         FillColliders(fillColliders);
-        foreach(ObjectInfo obj in fillObjects){
-            FillObject(obj);
+        for (int i = 0; i < fillObjects.Count; i++)
+        {
+            ObjectInfo cur = new ObjectInfo(fillObjects[i]);
+            FillObject(cur);
         }
+        Debug.Log(ObjectInfoList.Count);
     }
 
     private void FillObject(ObjectInfo info){
@@ -203,7 +203,6 @@ public class EditMap : MonoBehaviour
     private void FillColliders(bool[,] fillColliders){
         float mapWidth = GetMapWidth(), mapHeight = GetMapHeight();
         for (int i = 0; i < fillColliders.GetLength(0); i++){
-
             for (int j = 0; j < fillColliders.GetLength(1); j++){
                 if(fillColliders[i,j]){
                     float posOfWidth = -mapWidth / 2 + j * COLLIDER_SIZE + COLLIDER_SIZE / 2;
@@ -212,11 +211,8 @@ public class EditMap : MonoBehaviour
                     AddedObject.transform.localPosition = new Vector2(posOfWidth, posOfHeight);
                     Colliders.Add(AddedObject);
                 }
-
-            
             }
         }
-
     }
 
     public void SaveBackgroundPath(string name)
@@ -277,6 +273,7 @@ public class EditMap : MonoBehaviour
     public void RemoveObject(GameObject obj)
     {
         int idx = Objects.IndexOf(obj);
+        Debug.Log(idx);
         Objects.RemoveAt(idx);
         ObjectInfoList.RemoveAt(idx);
     }
