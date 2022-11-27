@@ -56,14 +56,18 @@ public class EditMap : MonoBehaviour
             Destroy(Instance);
         }
         Instance = this;
-    }
-
-    private void Start()
-    {
         Objects = new List<GameObject>();
         ObjectInfoList = new List<ObjectInfo>();
         Colliders = new List<GameObject>();
         InitializeColliderMap();
+    }
+
+    private void Start()
+    {
+        //Objects = new List<GameObject>();
+        //ObjectInfoList = new List<ObjectInfo>();
+        //Colliders = new List<GameObject>();
+        //InitializeColliderMap();
     }
 
     public void OnEnable()
