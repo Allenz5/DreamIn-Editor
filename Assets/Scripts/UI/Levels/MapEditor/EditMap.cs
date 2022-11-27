@@ -191,7 +191,6 @@ public class EditMap : MonoBehaviour
             ObjectInfo cur = new ObjectInfo(fillObjects[i]);
             FillObject(cur);
         }
-        Debug.Log(ObjectInfoList.Count);
     }
 
     private void FillObject(ObjectInfo info){

@@ -16,8 +16,8 @@ namespace EditorLogics
     {
         public static EditorData Instance;
         //Basic info of game
-        [HideInInspector] public string user_id = "";
-        [HideInInspector] public string game_id = "";
+        public string user_id = "";
+        public string game_id = "";
         [HideInInspector] public int status;
         [HideInInspector] public int game_type = 1;
         [HideInInspector] public string name;
@@ -58,12 +58,11 @@ namespace EditorLogics
             SettingEditor.SetActive(false);
             GameSettings.SetActive(false);
 
-            StartCoroutine(GetGameData("60"));
-            /*
+            GetGameScriptID("10", "66");
             if (game_id != "")
             {
-                GetGameData(game_id);
-            }*/
+                StartCoroutine(GetGameData(game_id));
+            }
         }
 
         public override string ToString()

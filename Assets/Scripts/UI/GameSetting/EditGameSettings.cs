@@ -87,7 +87,7 @@ public class EditGameSettings : MonoBehaviour
         Debug.Log(dataJsonStr);
 
         //Send data
-        //EditorLogics.Network.SendJsonByHttpPost(dataJsonStr);
+        EditorLogics.Network.SendJsonByHttpPost(dataJsonStr);
 
         GameUI.SetActive(false);
         FinishPage.SetActive(true);
@@ -120,7 +120,7 @@ public class EditGameSettings : MonoBehaviour
         Debug.Log(dataJsonStr);
 
         //Send data
-        //EditorLogics.Network.SendJsonByHttpPost(dataJsonStr);
+        EditorLogics.Network.SendJsonByHttpPost(dataJsonStr);
 
         //Finish
         GameUI.SetActive(false);

@@ -23,6 +23,7 @@ public class EditLevels : MonoBehaviour
 
     //Constant
     private int maxLevels = 5;
+    private int COLLIDER_SIZE = 32;
 
     void Awake()
     {
@@ -89,19 +90,19 @@ public class EditLevels : MonoBehaviour
         currentPanel.GetLevelInfo().SetSummary(m.end);
         currentPanel.GetLevelInfo().SetQuestion(m.question);
 
+        Debug.Log(m.collide_map);
+        Sprite bg = Resources.Load<Sprite>(m.background);
+        bool[,] ColliderMap = new bool[Mathf.CeilToInt(bg.texture.height / COLLIDER_SIZE), Mathf.CeilToInt(bg.texture.width / COLLIDER_SIZE)];
         string[] rows = m.collide_map.Split(';');
-        bool[,] ColliderMap = new bool[rows.Length, rows[0].Length];
         for (int i = 0; i < rows.Length; i++)
         {
-            for (int j = 0; j < rows[0].Length; j++)
+            string[] cols = rows[i].Split(',');
+            for (int j = 0; j < cols.Length - 1; j++)
             {
-                if (rows[i][j] == '0')
-                {
-                    ColliderMap[i,j] = false;
-                } else
-                {
-                    ColliderMap[i,j] = true;
-                }
+                int idx = int.Parse(cols[j]);
+                ColliderMap[i, idx] = true;
+                Debug.Log(idx);
+                Debug.Log(i);
             }
         }
         currentPanel.GetLevelInfo().SetCollideMap(ColliderMap);
