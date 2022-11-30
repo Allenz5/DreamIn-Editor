@@ -58,7 +58,6 @@ namespace EditorLogics
             SettingEditor.SetActive(false);
             GameSettings.SetActive(false);
 
-            GetGameScriptID("10", "66");
             if (game_id != "")
             {
                 StartCoroutine(GetGameData(game_id));
