@@ -57,6 +57,9 @@ namespace EditorLogics
             Level.SetActive(false);
             SettingEditor.SetActive(false);
             GameSettings.SetActive(false);
+            //string param = "{\"uid\":\"31\",\"id\":\"54\"}";
+            //GetGameScriptID(param);
+            //Debug.Log(game_id);
 
             if (game_id != "")
             {
@@ -159,10 +162,16 @@ namespace EditorLogics
 
         }
 
-        public void GetGameScriptID(string user, string game)
+        private class DataParam{
+            public string uid;
+            public string id;
+        }
+
+        public void GetGameScriptID(string param)
         {
-            user_id = user;
-            game_id = game;
+            DataParam data_info = JsonUtility.FromJson<DataParam>(param);
+            user_id = data_info.uid;
+            game_id = data_info.id;
         }
 
         #endregion
