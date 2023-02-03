@@ -6,26 +6,24 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// Object Script
 /// </summary>
-public class ObjectScript : MonoBehaviour, IPointerClickHandler
+public class ObjectScript : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
 {
     public string message = null;
-    /// <summary>
-    /// Handle events onclick
-    /// </summary>
-    /// <param name="eventData"></param>
-    public void OnPointerClick(PointerEventData eventData)
+
+    public void OnPointerDown(PointerEventData eventData)
     {
-            switch(MapInteractions.Instance.ObjectType){
-                case -1:
-                    ShowInfo();
-                    break;
-                case 2:
-                    Remove();
-                    break;
-                case 3:
-                    Rotate();
-                    break;
-            }
+        if (Input.GetMouseButton(0) && MapInteractions.Instance.ObjectType == 2)
+        {
+            Remove();
+        }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (Input.GetMouseButton(0) && MapInteractions.Instance.ObjectType == 2)
+        {
+            Remove();
+        }
     }
 
     /// <summary>

@@ -12,7 +12,7 @@ using TMPro;
 /// <summary>
 /// Map interactions
 /// </summary>
-public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class MapInteractions : MonoBehaviour, IPointerDownHandler, IDragHandler
 {
     public GameObject Background;
     public GameObject CollideMap;
@@ -38,7 +38,6 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     public static MapInteractions Instance;
 
     //Map dragging
-    private bool Dragging = false;
     private Vector3 MouseIniPos;
     void Awake()
     {
@@ -58,26 +57,19 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         {
             TempImage.transform.position = Input.mousePosition;
         }
-        if (Dragging)
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        if (Input.GetMouseButton(1) || (Input.GetMouseButton(0) && ObjectType == 4))
         {
             Vector3 diff = Input.mousePosition - MouseIniPos;
             Background.transform.position += diff;
             CollideMap.transform.position += diff;
             MouseIniPos = Input.mousePosition;
-        }
-    }
-
-    /// <summary>
-    /// Stop dragging on pointer up
-    /// </summary>
-    /// <param name="eventData"></param>
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        if (ObjectType == 4 && !Input.GetMouseButton(0) && !Input.GetMouseButton(1)){
-            Dragging = false;
-        } else if (ObjectType != 4 && Input.GetMouseButtonUp(1))
+        } else if (Input.GetMouseButton(0) && ObjectType == 1)
         {
-            Dragging = false;
+            EditMap.Instance.AddCollider();
         }
     }
 
@@ -90,16 +82,11 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         if (Input.GetMouseButtonDown(1))
         {
             MouseIniPos = Input.mousePosition;
-            Dragging = true;
         } else if (ObjectType == 0 && Input.GetMouseButtonDown(0) && TempImage.GetComponent<Image>().sprite != null)
         {
             EditMap.Instance.AddObject();
-        } else if (ObjectType == 1 && Input.GetMouseButtonDown(0) && TempImage.GetComponent<Image>().sprite != null)
-        {
-            EditMap.Instance.AddCollider();
         } else if (ObjectType == 4 && Input.GetMouseButtonDown(0)){
             MouseIniPos = Input.mousePosition;
-            Dragging = true;
         }
     }
 
@@ -130,6 +117,7 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         TempImage.GetComponent<Image>().sprite = ColliderImage.GetComponent<Image>().sprite;
         TempImage.GetComponent<Image>().color = ColliderImage.GetComponent<Image>().color;
         TempImage.GetComponent<Image>().rectTransform.sizeDelta = ColliderImage.GetComponent<Image>().rectTransform.sizeDelta;
+        CollideMap.SetActive(true);
     }
 
     /// <summary>
@@ -141,7 +129,7 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         TempImage.GetComponent<Image>().sprite = EraserImage;
         TempImage.GetComponent<Image>().color = Color.white;
         TempImage.GetComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
-        CollideMap.SetActive(false);
+        CollideMap.SetActive(true);
 
     }
 

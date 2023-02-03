@@ -6,22 +6,25 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// Collider script
 /// </summary>
-public class ColliderScript : MonoBehaviour, IPointerClickHandler
+public class ColliderScript : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
 {
     public GameObject CurrentObject;
-    /// <summary>
-    /// Destroy this collider onclick
-    /// </summary>
-    /// <param name="eventData"></param>
-    public void OnPointerClick(PointerEventData eventData)
+
+    public void OnPointerDown(PointerEventData eventData)
     {
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButton(0) && MapInteractions.Instance.ObjectType == 2)
         {
-            if (CurrentObject.transform.parent.parent.GetChild(0).GetComponent<MapInteractions>().ObjectType == 1)
-            {
-                EditMap.Instance.RemoveCollider(CurrentObject);
-                Destroy(CurrentObject);
-            }
+            EditMap.Instance.RemoveCollider(CurrentObject);
+            Destroy(CurrentObject);
+        }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (Input.GetMouseButton(0) && MapInteractions.Instance.ObjectType == 2)
+        {
+            EditMap.Instance.RemoveCollider(CurrentObject);
+            Destroy(CurrentObject);
         }
     }
 }

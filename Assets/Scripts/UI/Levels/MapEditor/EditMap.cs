@@ -231,6 +231,10 @@ public class EditMap : MonoBehaviour
         int indexOfWidth = Mathf.FloorToInt(Math.Abs(mousePos.x - (mapPos.x - mapWidth / 2)) / COLLIDER_SIZE);
         int indexOfHeight = Mathf.FloorToInt(Math.Abs(mousePos.y - (mapPos.y + mapHeight / 2)) / COLLIDER_SIZE);
 
+        if (ColliderMap[indexOfHeight, indexOfWidth] == true)
+        {
+            return;
+        }
         float posOfWidth = -mapWidth / 2 + indexOfWidth * COLLIDER_SIZE + COLLIDER_SIZE / 2;
         float posOfHeight = mapHeight / 2 - indexOfHeight * COLLIDER_SIZE - COLLIDER_SIZE / 2;
 
@@ -276,7 +280,6 @@ public class EditMap : MonoBehaviour
     public void RemoveObject(GameObject obj)
     {
         int idx = Objects.IndexOf(obj);
-        Debug.Log(idx);
         Objects.RemoveAt(idx);
         ObjectInfoList.RemoveAt(idx);
     }
